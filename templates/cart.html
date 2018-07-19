@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% set total = namespace(a=0) %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Melon Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+
+            {% for melon in melons %}
+            <tr>
+                <td>{{melon.common_name}}</td>
+                <td>{{session["cart"][melon.melon_id]}}</td>
+                <td>{{"${:,.2f}".format(melon.price)}}</td>
+                <td>{{"${:,.2f}".format(melon.price*session["cart"][melon.melon_id])}}</td>
+            </tr>
+            {% set total.a = total.a + (melon.price*session["cart"][melon.melon_id]) %}
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    <h3>{{"${:,.2f}".format(total.a)}}</h3>
+
+    <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
+
+{# endwith #}
+{% endblock %}
