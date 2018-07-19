@@ -21,7 +21,7 @@
             <tr>
                 <td>{{melon.common_name}}</td>
                 <td>{{session["cart"][melon.melon_id]}}</td>
-                <td>{{"${:,.2f}".format(melon.price)}}</td>
+                <td>{{melon.price_str()}}</td>
                 <td>{{"${:,.2f}".format(melon.price*session["cart"][melon.melon_id])}}</td>
             </tr>
             {% set total.a = total.a + (melon.price*session["cart"][melon.melon_id]) %}
